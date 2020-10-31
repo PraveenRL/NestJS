@@ -2,7 +2,7 @@
   "name": "wanago",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Praveen RL",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -21,12 +21,18 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "@nestjs/common": "^7.0.0",
+    "@nestjs/config": "^0.5.0",
     "@nestjs/core": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
+    "@nestjs/typeorm": "^7.1.4",
+    "@types/hapi__joi": "^17.1.6",
+    "pg": "^8.4.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.5.4"
+    "rxjs": "^6.5.4",
+    "typeorm": "^0.2.28"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",
