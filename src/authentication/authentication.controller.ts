@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Post, Req, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Logger, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 
 import { AuthenticationService } from './authentication.service';
@@ -41,6 +41,7 @@ export class AuthenticationController {
   authenticate(@Req() request: RequestWithUser) {
     const user = request.user;
     user.password = undefined;
+    Logger.log(user, 'GET LOGGED IN USER');
     return user;
   }
 }
