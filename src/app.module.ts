@@ -9,6 +9,7 @@ import { PostsModule } from './posts/posts.module';
 import { UserModule } from './user/user.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { ExceptionsLoggerFilter } from './shared/utils/exception-logger.filter';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ExceptionsLoggerFilter } from './shared/utils/exception-logger.filter';
     PostsModule,
     UserModule,
     AuthenticationModule,
+    CategoriesModule,
   ],
   controllers: [],
   providers: [
