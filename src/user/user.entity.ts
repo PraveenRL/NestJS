@@ -1,5 +1,7 @@
 import { Exclude, Expose } from "class-transformer/decorators";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm";
+
+import { Address } from "src/user/address.entity";
 
 @Entity()
 export class User {
@@ -16,4 +18,11 @@ export class User {
   @Column()
   @Exclude()  //Remove in response
   public password: string;
+
+  @OneToOne(() => Address, {
+    eager: true,
+    cascade: true
+  })
+  @JoinColumn()
+  public address: Address;
 }

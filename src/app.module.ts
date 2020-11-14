@@ -27,7 +27,7 @@ import { ExceptionsLoggerFilter } from './shared/utils/exception-logger.filter';
     DatabaseModule,
     PostsModule,
     UserModule,
-    AuthenticationModule
+    AuthenticationModule,
   ],
   controllers: [],
   providers: [
