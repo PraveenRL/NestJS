@@ -20,7 +20,7 @@ export class Post {
   @ManyToOne(() => User, (author: User) => author.posts)
   public author: User;
 
-  @ManyToMany(() => Category)
+  @ManyToMany(() => Category, (category: Category) => category.posts)
   @JoinTable()
   public categories: Category[];
 }
