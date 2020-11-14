@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, FindManyOptions, MoreThan } from 'typeorm';
 
 import { User } from 'src/user/user.entity';
 import { Post } from './post.entity';
@@ -14,6 +14,30 @@ export class PostsService {
     @InjectRepository(Post)
     private readonly postsRepository: Repository<Post>
   ) { }
+
+  async getAllPostsLimitOffset(offset?: number, limit?: number, startId?: number) {
+    const where: FindManyOptions<Post>['where'] = {};
+    let separateCount = 0;
+    if (startId) {
+      where.id = MoreThan(startId);
+      separateCount = await this.postsRepository.count();
+    }
+
+    const [items, count] = await this.postsRepository.findAndCount({
+      where,
+      relations: ['author'],
+      order: {
+        id: 'ASC'
+      },
+      skip: offset,
+      take: limit
+    });
+
+    return {
+      items,
+      count: startId ? separateCount : count
+    }
+  }
 
   getAllPosts() {
     return this.postsRepository.find({ relations: ['author'] });

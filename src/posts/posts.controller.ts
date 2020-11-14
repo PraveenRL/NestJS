@@ -1,18 +1,30 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, Req } from '@nestjs/common';
+import {
+  Body, Controller, Delete, Get, Param,
+  Post, Put, UseGuards, Req, ClassSerializerInterceptor, UseInterceptors, Query
+} from '@nestjs/common';
 
 import { JwtAuthenticationGuard } from 'src/authentication/jwt-authentication.guard';
 import { RequestWithUser } from 'src/authentication/interface/request-with-user.interface';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { PaginationParams } from './pagination-params';
 
 @Controller('posts')
+@UseInterceptors(ClassSerializerInterceptor)
 export class PostsController {
   constructor(
     private readonly postsService: PostsService
   ) { }
 
   @Get()
+  async getPosts(
+    @Query() { offset, limit, startId }: PaginationParams
+  ) {
+    return this.postsService.getAllPostsLimitOffset(offset, limit, startId);
+  }
+
+  @Get('all')
   getAllPosts() {
     return this.postsService.getAllPosts();
   }
