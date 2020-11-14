@@ -1,7 +1,8 @@
 import { Exclude, Expose } from "class-transformer/decorators";
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from "typeorm";
 
 import { Address } from "src/user/address.entity";
+import { Post } from "src/posts/post.entity";
 
 @Entity()
 export class User {
@@ -25,4 +26,7 @@ export class User {
   })
   @JoinColumn()
   public address: Address;
+
+  @OneToMany(() => Post, (post: Post) => post.author)
+  public posts: Post[];
 }
